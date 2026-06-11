@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  jira:
+    image: atlassian/jira-software:latest
+    container_name: jira
+    ports:
+      - "8080:8080"
+    volumes:
+      - jira_data:/var/atlassian/application-data/jira
+    networks:
+      - intranet-net
+
+volumes:
+  jira_data:
+
+networks:
+  intranet-net:
+    driver: bridge

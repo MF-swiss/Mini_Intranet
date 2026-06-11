@@ -1,15 +1,19 @@
-# Portainer – AlpineSystems AG
 
-## Zweck
-Portainer dient als Monitoring- und Verwaltungsoberfläche für alle Docker-Container.
 
-## Zugriff
-- URL: http://localhost:9000
-- Admin-User wird beim ersten Start im Browser eingerichtet.
 
-## Persistenz
-Die Daten werden im Volume `portainer_data` gespeichert:
-- Pfad im Container: /data
 
-## Besonderheit
-Portainer greift über `/var/run/docker.sock` direkt auf den Docker-Daemon zu.
+
+
+## Jira – Ticket-System für interne Aufgaben und Bugs.
+
+URL: http://localhost:8080
+Admin-User wird beim ersten Start erstellt.
+Beispielprojekt: AlpineCore
+
+
+
+## Portainer – Monitoring und Verwaltung aller Docker-Container.
+
+URL: http://localhost:9000
+Admin-User wird beim ersten Start erstellt.
+Zeigt CPU, RAM, Logs und Container-Status an.
