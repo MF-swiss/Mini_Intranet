@@ -1,9 +1,31 @@
-jira:
-  image: atlassian/jira-software:latest
-  container_name: jira
-  ports:
-    - "8080:8080"
-  volumes:
-    - jira_data:/var/atlassian/application-data/jira
-  networks:
-    - intranet-net
+version: "3.9"
+
+networks:
+  intranet-net:
+    driver: bridge
+
+volumes:
+  jira_data:
+  portainer_data:
+
+services:
+  jira:
+    image: atlassian/jira-software:latest
+    container_name: jira
+    ports:
+      - "8080:8080"
+    volumes:
+      - jira_data:/var/atlassian/application-data/jira
+    networks:
+      - intranet-net
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - intranet-net
