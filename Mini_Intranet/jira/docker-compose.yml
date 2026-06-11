@@ -6,13 +6,32 @@ services:
     container_name: jira
     ports:
       - "8080:8080"
+    depends_on:
+      - jira-db
+    environment:
+      - ATL_JDBC_URL=jdbc:postgresql://jira-db:5432/jiradb
+      - ATL_JDBC_USER=jira
+      - ATL_JDBC_PASSWORD=jira123
     volumes:
       - jira_data:/var/atlassian/application-data/jira
     networks:
       - intranet-net
 
+  jira-db:
+    image: postgres:15
+    container_name: jira-db
+    environment:
+      - POSTGRES_DB=jiradb
+      - POSTGRES_USER=jira
+      - POSTGRES_PASSWORD=jira123
+    volumes:
+      - jira_db_data:/var/lib/postgresql/data
+    networks:
+      - intranet-net
+
 volumes:
   jira_data:
+  jira_db_data:
 
 networks:
   intranet-net:
