@@ -8,6 +8,7 @@ Diese Anleitung beschreibt, wie ich meine beiden Microservices (Jira & Portainer
 
 ## 📁 Ordnerstruktur (mein Bereich)
 
+```
 Mini_Intranet/
 ├── jira/
 │   └── docker-compose.yml
@@ -15,8 +16,7 @@ Mini_Intranet/
 │   └── docker-compose.yml
 ├── deploy.sh
 └── README.md
-
-
+```
 
 Ich arbeite nur in:
 - `jira/docker-compose.yml`
@@ -29,34 +29,34 @@ Ich arbeite nur in:
 # 1. Jira starten
 
 ## 1.1 In den Jira‑Ordner wechseln
-cd MINI_INTRANET/Mini_Intranet/jira
-
-Code
+```bash
+cd Mini_Intranet/jira
+```
 
 ## 1.2 Jira Container starten
+```bash
 docker compose up -d
-
-Code
+```
 
 ## 1.3 Jira im Browser öffnen
+```
 http://localhost:8080
-
-Code
+```
 
 ## 1.4 Jira einrichten
 - Admin‑Benutzer erstellen  
 - Sprache & Einstellungen bestätigen  
 
 ## 1.5 Beispielprojekt erstellen
-- „Create Project“
+- „Create Project"
 - Template: **Kanban**
 - Name: **AlpineCore**
 - Key: **AC**
 
 ## 1.6 Beispiel‑Tickets anlegen
-- „WordPress Logo einfügen“
-- „MediaWiki Kategorien erstellen“
-- „Portainer Monitoring testen“
+- „WordPress Logo einfügen"
+- „MediaWiki Kategorien erstellen"
+- „Portainer Monitoring testen"
 
 Screenshots für Testprotokoll machen.
 
@@ -65,27 +65,27 @@ Screenshots für Testprotokoll machen.
 # 2. Portainer starten
 
 ## 2.1 In den Portainer‑Ordner wechseln
+```bash
 cd ../portainer
-
-Code
+```
 
 ## 2.2 Portainer Container starten
+```bash
 docker compose up -d
-
-Code
+```
 
 ## 2.3 Portainer im Browser öffnen
-http://localhost:9000
-
-Code
+```
+https://localhost:9443
+```
 
 ## 2.4 Portainer einrichten
 - Admin‑Benutzer erstellen  
-- „Local Environment“ auswählen  
+- „Local Environment" auswählen  
 
 ## 2.5 Monitoring öffnen
 - Menü → Containers  
-- Container auswählen (z. B. `jira`)  
+- Container auswählen (z. B. `jira`)  
 - Tabs: **Stats**, **Logs**
 
 Screenshots für Testprotokoll machen.
@@ -95,9 +95,9 @@ Screenshots für Testprotokoll machen.
 # 3. Services stoppen
 (Jeweils im richtigen Ordner)
 
+```bash
 docker compose down
-
-Code
+```
 
 ---
 
@@ -105,10 +105,10 @@ Code
 
 Im Hauptordner:
 
+```bash
 cd ..
 ./deploy.sh
-
-Code
+```
 
 Startet:
 - WordPress  

@@ -1,9 +1,8 @@
-version: "3.9"
-
 services:
   jira:
-    image: atlassian/jira-software:8.20.0
+    image: atlassian/jira-software:latest
     container_name: jira
+    restart: unless-stopped
     ports:
       - "8080:8080"
     depends_on:
@@ -21,8 +20,9 @@ services:
       - intranet-net
 
   jira-db:
-    image: postgres:12
+    image: postgres:15
     container_name: jira-db
+    restart: unless-stopped
     environment:
       - POSTGRES_DB=jiradb
       - POSTGRES_USER=jira
@@ -37,9 +37,22 @@ services:
       timeout: 5s
       retries: 5
 
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: unless-stopped
+    ports:
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - intranet-net
+
 volumes:
   jira_data:
   jira_db_data:
+  portainer_data:
 
 networks:
   intranet-net:
