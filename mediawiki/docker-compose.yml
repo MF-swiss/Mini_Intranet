@@ -1,0 +1,27 @@
+services:
+  mediawiki:
+    image: mediawiki:latest
+    container_name: mediawiki
+    ports:
+      - "8083:80"
+    volumes:
+      - mediawiki-data:/var/www/html/images
+    depends_on:
+      - mediawiki-db
+    restart: always
+
+  mediawiki-db:
+    image: mysql:8.0
+    container_name: mediawiki-db
+    environment:
+      MYSQL_DATABASE: mediawiki
+      MYSQL_USER: mediawiki
+      MYSQL_PASSWORD: mediawiki123
+      MYSQL_ROOT_PASSWORD: root123
+    volumes:
+      - mediawiki-db-data:/var/lib/mysql
+    restart: always
+
+volumes:
+  mediawiki-data:
+  mediawiki-db-data:
