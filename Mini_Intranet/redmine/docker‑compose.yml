@@ -1,0 +1,34 @@
+services:
+  redmine:
+    image: redmine:5
+    container_name: redmine
+    depends_on:
+      - redmine-db
+    environment:
+      REDMINE_DB_MYSQL: redmine-db
+      REDMINE_DB_DATABASE: redmine
+      REDMINE_DB_USERNAME: redmine
+      REDMINE_DB_PASSWORD: redmine123
+    ports:
+      - "8080:3000"
+    volumes:
+      - redmine_data:/usr/src/redmine/files
+    networks:
+      - intranet-net
+
+  redmine-db:
+    image: mariadb:10.6
+    container_name: redmine-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: redmine
+      MYSQL_USER: redmine
+      MYSQL_PASSWORD: redmine123
+    volumes:
+      - redmine_db_data:/var/lib/mysql
+    networks:
+      - intranet-net
+
+volumes:
+  redmine_data:
+  redmine_db_data:
