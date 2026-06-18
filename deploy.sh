@@ -45,6 +45,7 @@ services:
     container_name: portainer
     ports:
       - "9000:9000"
+      - "9443:9443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - mini_intranet_portainer_data:/data
