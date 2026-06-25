@@ -21,10 +21,7 @@ MINI_INTRANET/
 │
 ├── Mini_Intranet/
 │   ├── portainer/
-│   ├── redmine/
-│   └── wordpress/   (optional)
-│
-├── mediawiki/        (optional)
+│   └── redmine/
 ├── deploy.sh
 └── ports.md
 
