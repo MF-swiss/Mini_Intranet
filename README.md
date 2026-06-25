@@ -25,7 +25,7 @@ MINI_INTRANET/
 ├── deploy.sh
 └── ports.md
 
-
+git pu
 ---
 
 # 🔧 Allgemeine Docker-Befehle
