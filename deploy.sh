@@ -1,69 +1,51 @@
 #!/bin/bash
+set -e
 
+# ROOTDIR = Verzeichnis, in dem dieses Skript liegt (enthält ports.md, README.md, etc.)
+ROOTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# BASEDIR = Unterordner, in dem die eigentlichen Service-Ordner liegen
+# (wordpress/, mediawiki/, redmine/, portainer/)
+BASEDIR="$ROOTDIR/Mini_Intranet"
+PORTS_FILE="$ROOTDIR/ports.md"
 
-services:
+# Liste der Unterordner mit docker-compose.yml
+SERVICES=("wordpress" "mediawiki" "redmine" "portainer")
 
-  wordpress:
+if [ ! -d "$BASEDIR" ]; then
+    echo "FEHLER: Unterordner 'Mini_Intranet' nicht gefunden unter $BASEDIR"
+    exit 1
+fi
 
+echo "==> Starte Deployment aller Docker-Compose Services..."
 
-  mediawiki:
+for SERVICE in "${SERVICES[@]}"; do
+    COMPOSE_FILE="$BASEDIR/$SERVICE/docker-compose.yml"
 
+    if [ -f "$COMPOSE_FILE" ]; then
+        echo ""
+        echo "==> [$SERVICE] docker-compose.yml gefunden, starte Container..."
+        (cd "$BASEDIR/$SERVICE" && docker compose up -d)
+        echo "==> [$SERVICE] erfolgreich gestartet."
+    else
+        echo "==> [$SERVICE] WARNUNG: Keine docker-compose.yml gefunden unter $COMPOSE_FILE, übersprungen."
+    fi
+done
 
-
-
-  redmine:
-    image: redmine:latest
-    container_name: redmine
-    ports:
-      - "8080:3000"
-    environment:
-      REDMINE_DB_MYSQL: redmine-db
-      REDMINE_DB_USERNAME: rmuser
-      REDMINE_DB_PASSWORD: rmpass
-      REDMINE_DB_DATABASE: redmine
-    volumes:
-      - mini_intranet_redmine_data:/usr/src/redmine/files
-    depends_on:
-      - redmine-db
-    restart: always
-
-  redmine-db:
-    image: mariadb:11
-    container_name: redmine-db
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpass
-      MYSQL_DATABASE: redmine
-      MYSQL_USER: rmuser
-      MYSQL_PASSWORD: rmpass
-    volumes:
-      - mini_intranet_redmine_db_data:/var/lib/mysql
-    restart: always
-
-  portainer:
-    image: portainer/portainer-ce:latest
-    container_name: portainer
-    ports:
-      - "9000:9000"
-      - "9443:9443"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - mini_intranet_portainer_data:/data
-    restart: always
-
-volumes:
-
-
-  mini_intranet_redmine_data:
-  mini_intranet_redmine_db_data:
-  mini_intranet_portainer_data:
-EOF
-
-
-echo "✅ Installation abgeschlossen!"
 echo ""
-echo "📌 Dienste erreichbar unter:"
-echo "   WordPress:   
-echo "   MediaWiki:   
-echo "   Redmine:     http://localhost:8080"
-echo "   Portainer:   http://localhost:9000"
+echo "==> Alle Services abgearbeitet."
+echo ""
+echo "Installation abgeschlossen!"
+echo ""
+echo "Dienste erreichbar unter:"
+
+if [ -f "$PORTS_FILE" ]; then
+    # Zeilen im Format "├── :8080 → Redmine" auslesen
+    grep -E ':[0-9]+.*→' "$PORTS_FILE" | while read -r LINE; do
+        PORT=$(echo "$LINE" | grep -oE ':[0-9]+' | head -1 | tr -d ':')
+        NAME=$(echo "$LINE" | sed -E 's/.*→\s*//' | tr -d '\r')
+        printf "   %-12s http://localhost:%s\n" "$NAME:" "$PORT"
+    done
+else
+    echo "   WARNUNG: ports.md nicht gefunden unter $PORTS_FILE"
+fi
