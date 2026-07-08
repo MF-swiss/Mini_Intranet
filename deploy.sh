@@ -40,11 +40,16 @@ echo ""
 echo "Dienste erreichbar unter:"
 
 if [ -f "$PORTS_FILE" ]; then
-    # Zeilen im Format "├── :8080 → Redmine" auslesen
     grep -E ':[0-9]+.*→' "$PORTS_FILE" | while read -r LINE; do
         PORT=$(echo "$LINE" | grep -oE ':[0-9]+' | head -1 | tr -d ':')
         NAME=$(echo "$LINE" | sed -E 's/.*→\s*//' | tr -d '\r')
-        printf "   %-12s http://localhost:%s\n" "$NAME:" "$PORT"
+
+        # Wenn der Dienst Portainer ist → HTTPS verwenden
+        if echo "$NAME" | grep -qi "portainer"; then
+            printf "   %-12s https://localhost:%s\n" "$NAME:" "$PORT"
+        else
+            printf "   %-12s http://localhost:%s\n" "$NAME:" "$PORT"
+        fi
     done
 else
     echo "   WARNUNG: ports.md nicht gefunden unter $PORTS_FILE"
