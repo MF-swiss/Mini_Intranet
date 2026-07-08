@@ -36,7 +36,7 @@ git pu
 
 | Service | URL | Zuständig |
 |---|---|---|
-| Portainer | http://localhost:9000 | Marco |
+| Portainer | https://localhost:9443 | Marco |
 | Redmine | http://localhost:8080 | Marco |
 | WordPress | http://localhost:8082 | Marina |
 | MediaWiki | http://localhost:8083 | Marina |
