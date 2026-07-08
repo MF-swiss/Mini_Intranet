@@ -55,7 +55,7 @@ Installation abgeschlossen!
 
 Dienste erreichbar unter:
    Redmine:     http://localhost:8080
-   Portainer:   http://localhost:9443
+   Portainer:   https://localhost:9443
    WordPress:   http://localhost:8082
    MediaWiki:   http://localhost:8083
 ```
