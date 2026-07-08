@@ -36,12 +36,12 @@ MINI_INTRANET/
 
 ## 🌐 Service-Übersicht
 
-| Service | URL | Zuständig |
-|---|---|---|
-| Portainer | https://localhost:9443 | Marco |
-| Redmine | http://localhost:8080 | Marco |
-| WordPress | http://localhost:8082 | Marina |
-| MediaWiki | http://localhost:8083 | Marina |
+|  Service  | URL                    | Zuständig |
+|-----------|------------------------|-----------|
+| Portainer | https://localhost:9443 | Marco     |
+| Redmine   | http://localhost:8080  | Marco     |
+| WordPress | http://localhost:8082  | Marina    |
+| MediaWiki | http://localhost:8083  | Marina    |
 
 ---
 ## 🔧 Allgemeine Docker-Befehle
@@ -100,17 +100,17 @@ docker compose up -d
 - http://localhost:8080
 
 **Standard-Login:**
-| Feld | Wert |
-|---|---|
+| Feld         | Wert  |
+|--------------|-------|
 | Benutzername | admin |
-| Passwort | admin |
+| Passwort     | admin |
 
 **Datenbank:**
-| Feld | Wert |
-|---|---|
-| Host | redmine-db |
-| Benutzer | rmuser |
-| Passwort | rmpass |
+| Feld     | Wert       |
+|----------|------------|
+| Host     | redmine-db |
+| Benutzer | rmuser     |
+| Passwort | rmpass     |
 
 **Volumes:**
 - `redmine_data` – Dateien
@@ -132,20 +132,20 @@ docker compose up -d
 - http://localhost:8082
 
 **Login-Daten:**
-| Feld | Wert |
-|---|---|
-| Admin URL | http://localhost:8082/wp-admin |
-| Benutzername | admin |
-| Passwort | Infinit.1234 |
-| E-Mail | admin@alpinesystems.ch |
+| Feld         | Wert                           |
+|--------------|--------------------------------|
+| Admin URL    | http://localhost:8082/wp-admin |
+| Benutzername | admin                          |
+| Passwort     | Infinit.1234                   |
+| E-Mail       | admin@alpinesystems.ch         |
 
 **Datenbank:**
-| Feld | Wert |
-|---|---|
+| Feld      | Wert         |
+|-----------|--------------|
 | Container | wordpress-db |
-| Datenbank | wordpress |
-| Benutzer | wordpress |
-| Passwort | wordpress123 |
+| Datenbank | wordpress    |
+| Benutzer  | wordpress    |
+| Passwort  | wordpress123 |
 
 **Volumes:**
 - `wordpress_data` – WordPress Dateien
@@ -167,19 +167,19 @@ docker compose up -d
 - http://localhost:8083
 
 **Login-Daten:**
-| Feld | Wert |
-|---|---|
-| Benutzername | admin |
-| Passwort | Admin12345! |
-| E-Mail | admin@alpinesystems.ch |
+| Feld         | Wert                   |
+|--------------|------------------------|
+| Benutzername | admin                  |
+| Passwort     | Admin12345!            |
+| E-Mail       | admin@alpinesystems.ch |
 
 **Datenbank:**
-| Feld | Wert |
-|---|---|
+| Feld      | Wert         |
+|-----------|--------------|
 | Container | mediawiki-db |
-| Datenbank | mediawiki |
-| Benutzer | mediawiki |
-| Passwort | mediawiki123 |
+| Datenbank | mediawiki    |
+| Benutzer  | mediawiki    |
+| Passwort  | mediawiki123 |
 
 **Volumes:**
 - `mediawiki_data` – Wiki Dateien
@@ -189,21 +189,21 @@ docker compose up -d
 
 ## 🔐 Alle Login-Daten auf einen Blick
 
-| Service | URL | Benutzername | Passwort |
-|---|---|---|---|
-| WordPress | http://localhost:8082/wp-admin | admin | Infinit.1234 |
-| MediaWiki | http://localhost:8083 | admin | Admin12345! |
-| Redmine | http://localhost:8080 | admin | admin |
-| Portainer | http://localhost:9000 | admin | (beim ersten Start setzen) |
+| Service   | URL                            | Benutzername | Passwort                   |
+|-----------|--------------------------------|--------------|----------------------------|
+| WordPress | http://localhost:8082/wp-admin | admin        | Infinit.1234               |
+| MediaWiki | http://localhost:8083          | admin        | Admin12345!                |
+| Redmine   | http://localhost:8080          | admin        | admin                      |
+| Portainer | http://localhost:9000          | admin        | (beim ersten Start setzen) |
 
 ---
 
 ## ❓ Fehlerbehebung
 
-| Problem | Lösung |
-|---|---|
-| `docker-compose: command not found` | Docker Desktop starten → WSL Integration aktivieren |
-| Container startet nicht | `docker logs <containername>` ausführen |
-| Port bereits belegt | Port in `docker-compose.yml` anpassen |
-| WSL Integration fehler | Docker Desktop → Settings → WSL Integration → Restart |
-| Seite nicht erreichbar | `docker ps` prüfen ob Container Status "Up" hat |
+| Problem                             | Lösung                                                |
+|-------------------------------------|-------------------------------------------------------|
+| `docker-compose: command not found` | Docker Desktop starten → WSL Integration aktivieren   |
+| Container startet nicht             | `docker logs <containername>` ausführen               |
+| Port bereits belegt                 | Port in `docker-compose.yml` anpassen                 |
+| WSL Integration fehler              | Docker Desktop → Settings → WSL Integration → Restart |
+| Seite nicht erreichbar              | `docker ps` prüfen ob Container Status "Up" hat       |
