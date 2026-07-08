@@ -30,6 +30,7 @@ MINI_INTRANET/
 ├── ports.md
 ├── anleitung_deploy.md
 ├── Projektdokumentation.pdf
+├── Präsentation.pdf
 └── README.md
 
 ---
