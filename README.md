@@ -24,12 +24,14 @@ MINI_INTRANET/
 ├── Mini_Intranet/
 │   ├── portainer/          # Docker Management UI (Marco)
 │   ├── redmine/            # Projektmanagement (Marco)
-│   └── wordpress/          # Firmenhomepage (Marina)
-├── mediawiki/              # Internes Wiki (Marina)
+│   ├── wordpress/          # Firmenhomepage (Marina)
+│   └── mediawiki/          # Internes Wiki (Marina)
 ├── deploy.sh
-└── ports.md
+├── ports.md
+├── anleitung_deploy.md
+├── Projektdokumentation.pdf
+└── README.md
 
-git pu
 ---
 
 ## 🌐 Service-Übersicht
@@ -77,7 +79,6 @@ docker compose up -d
 ```
 
 **Zugriff:**
-- http://localhost:9000
 - https://localhost:9443
 
 **Volume:**
